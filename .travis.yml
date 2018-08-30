@@ -2,6 +2,11 @@ sudo: required
 services:
   - docker
 
+env:
+  - NPM_TARGET=test
+  - NPM_TARGET=lint
+  - NPM_TARGET=coverage
+
 before_install:
   - docker pull node:8-onbuild
 
@@ -9,8 +14,15 @@ install:
   - docker build -t probot-hello .
 
 script:
-  - docker run --rm probot-hello npm run test
-  - docker run --rm probot-hello npm run lint
+  - docker run --rm probot-hello npm run $NPM_TARGET
 
 after_success:
-  - docker tag probot-hello probot-hello:$(git rev-parse HEAD)
+  - set -x -v;
+    set -e;
+    if [ "${NPM_TARGET}" = "test" ]; then
+      docker tag probot-hello probot-hello:$(git rev-parse HEAD);
+    else
+      echo "skipping docker tag";
+    fi;
+    docker images;
+    set +x +v;
