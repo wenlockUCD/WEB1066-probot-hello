@@ -1,6 +1,6 @@
 {
   "name": "probot-hello",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Probot app",
   "author": "Edward Raigosa <wenlock@github.com>",
   "license": "ISC",
@@ -23,6 +23,8 @@
   "dependencies": {
     "dev": "^0.1.3",
     "probot": "^7.0.0",
+    "prom-client": "^11.2.0",
+    "express": "^4.13.3",
     "run": "^1.4.0"
   },
   "devDependencies": {
@@ -33,11 +35,14 @@
     "standard": "^10.0.3"
   },
   "engines": {
-    "node": ">= 8.3.0 <8.12.0"
+    "node": "8.3.0"
   },
   "standard": {
     "env": [
       "jest"
     ]
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
