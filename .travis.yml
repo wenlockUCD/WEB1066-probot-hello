@@ -1,12 +1,11 @@
 sudo: required
-
 services:
   - docker
 
 before_install:
   - docker pull node:8-onbuild
 
-  install:
+install:
   - docker build -t probot-hello .
 
 script:
